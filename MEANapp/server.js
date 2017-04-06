@@ -1,8 +1,15 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 8000
+var port = process.env.PORT || 8000;
 var morgan = require('morgan');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var User = require('./app/models/user');
+var bodyParser = require('body-parser');
+
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(morgan('dev'));
 
 mongoose.connect('mongodb://localhost:27017/test',function(err){
 	if(err) {
@@ -12,11 +19,21 @@ mongoose.connect('mongodb://localhost:27017/test',function(err){
 	}
 })
 
-app.use(morgan('dev'));
 
-app.get('/home', function(req,res){
-	res.send('Hello from home');
-})
+app.post('/users', function(req, res){
+	var user = new User();
+	user.username = req.body.username;
+	user.password = req.body.password;
+	user.email = req.body.email;
+	user.save(function(err){
+		if(err) {
+			res.send('Username or email already exists');
+		} else {
+			res.send('user created!')
+		}
+	});
+	
+});
 
 
 app.listen(port,function(){
