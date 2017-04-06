@@ -5,11 +5,15 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./app/models/user');
 var bodyParser = require('body-parser');
+var router = express.Router();
+var appRoutes = require('./app/routes/api')(router);
+var path = require('path');
 
-
+app.use(morgan('dev'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(morgan('dev'));
+app.use(express.static(__dirname + 'public'));
+app.use('/api',appRoutes);
 
 mongoose.connect('mongodb://localhost:27017/test',function(err){
 	if(err) {
@@ -19,22 +23,9 @@ mongoose.connect('mongodb://localhost:27017/test',function(err){
 	}
 })
 
-
-app.post('/users', function(req, res){
-	var user = new User();
-	user.username = req.body.username;
-	user.password = req.body.password;
-	user.email = req.body.email;
-	user.save(function(err){
-		if(err) {
-			res.send('Username or email already exists');
-		} else {
-			res.send('user created!')
-		}
-	});
-	
-});
-
+app.get('*',function(req,res){
+	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+})
 
 app.listen(port,function(){
 	console.log('Running the server  port:' + port);
