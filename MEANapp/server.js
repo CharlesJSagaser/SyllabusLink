@@ -12,7 +12,7 @@ var path = require('path');
 app.use(morgan('dev'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(__dirname + '/public'));
 app.use('/api',appRoutes);
 
 mongoose.connect('mongodb://localhost:27017/test',function(err){
