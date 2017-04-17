@@ -28,6 +28,6 @@ app.get('*',function(req,res){
 })
 
 app.listen(port,function(){
-	console.log('Running the server  port:' + port);
+	console.log('Running the server port:' + port);
 });
 
