@@ -1,6 +1,10 @@
+//creates a template for a user for it to be stored in the mongo database
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+
+
 
 var UserSchema = new Schema({
   username: { type: String, lowercase: true, required: true, unique: true},
@@ -16,7 +20,13 @@ UserSchema.pre('save', function(next) {
   	user.password = hash;
   	next();
   });
+
 });
+
+UserSchema.methods.comparePassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+};
+
 
 
 module.exports = mongoose.model('User', UserSchema);
