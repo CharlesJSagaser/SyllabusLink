@@ -1,4 +1,4 @@
-angular.module('authServices', [])
+sublangular.module('authServices', [])
 
     .factory('Auth', function($http){
         var authFactory = {};

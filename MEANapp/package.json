@@ -1,7 +1,7 @@
 {
   "name": "syllabuslink",
   "version": "1.0.0",
-  "description": "Mean stack app using syllabus' to create google doc updates",
+  "description": "Mean stack app using syllabus' to create google calender updates",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
     "stack",
     "syllabus"
   ],
-  "author": "Syrus Yeung",
+  "author": "Syrus Yeung, Charles Sagaser",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CharlesJSagaser/SyllabusLink/issues"

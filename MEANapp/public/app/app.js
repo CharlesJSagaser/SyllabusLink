@@ -1,2 +1,2 @@
-angular.module('userApp',['appRoutes', 'userControllers','userServices','mainController', 'authServices']);
+cd angular.module('userApp',['appRoutes', 'userControllers','userServices','mainController', 'authServices']);
 
