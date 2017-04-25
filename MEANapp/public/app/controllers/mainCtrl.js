@@ -3,17 +3,28 @@
 angular.module('mainController', ['authServices'])
 
 
-    .controller('mainCtrl', function(Auth,$timeout, $location){
-        var app = this; // so we can access outside of scope
+    .controller('mainCtrl', function(Auth,$timeout, $location,$rootScope){
+        var app = this; // so we can access outside of scoper
 
-        if(Auth.isLoggedIn()) {
-            console.log('Success: User is logged in.');
-            Auth.getUser().then(function(data){
-                console.log(data);
-            });
-        } else {
-            console.log('Failure: User is NOT logged in.')
-        }
+        app.loadme = false;
+
+        $rootScope.$on('$routeChangeStart', function() {
+            if(Auth.isLoggedIn()) {
+                app.isLoggedIn = true;
+                Auth.getUser().then(function(data){
+                    app.username = data.data.username;
+                    app.useremail = data.data.email;
+                    app.loadme = true;
+                });
+            } else {
+                app.isLoggedIn = false;
+                app.username = '';
+                app.loadme = true;
+
+            }
+        });
+
+
 
         this.doLogin = function(loginData) { //when the register button is pressed controller
             app.loading = true;
@@ -23,10 +34,10 @@ angular.module('mainController', ['authServices'])
                 if(data.data.success){
                     app.loading = false;
                     app.successMsg = data.data.message + '...redirecting';
-
-
-                    $timeout(function(){
+                    $timeout(function() {
                         $location.path('/about');
+                        app.loginData = '';
+                        app.successMsg = false;
                     }, 2000);
 
 
