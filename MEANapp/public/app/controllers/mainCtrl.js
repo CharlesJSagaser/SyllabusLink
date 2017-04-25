@@ -1,7 +1,19 @@
+//controls main index - runs when main page loads
+
 angular.module('mainController', ['authServices'])
 
-    .controller('mainCtrl', function(Auth, $location){
+
+    .controller('mainCtrl', function(Auth,$timeout, $location){
         var app = this; // so we can access outside of scope
+
+        if(Auth.isLoggedIn()) {
+            console.log('Success: User is logged in.');
+            Auth.getUser().then(function(data){
+                console.log(data);
+            });
+        } else {
+            console.log('Failure: User is NOT logged in.')
+        }
 
         this.doLogin = function(loginData) { //when the register button is pressed controller
             app.loading = true;
@@ -10,8 +22,12 @@ angular.module('mainController', ['authServices'])
             Auth.login(app.loginData).then(function(data){
                 if(data.data.success){
                     app.loading = false;
-                    app.successMsg = data.data.message;
-                    $location.path('/about');
+                    app.successMsg = data.data.message + '...redirecting';
+
+
+                    $timeout(function(){
+                        $location.path('/about');
+                    }, 2000);
 
 
 
@@ -22,6 +38,13 @@ angular.module('mainController', ['authServices'])
 
                 }
             });
+        };
+        this.logout = function() {
+            Auth.logout();
+            $location.path('/logout');
+            $timeout(function(){
+                $location.path('/');
+            }, 2000);
         };
     });
 

@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var secret = 'check123';
 
 module.exports = function(router){
 
@@ -29,7 +31,7 @@ module.exports = function(router){
 			if(err) throw err;
 
 			if(!user){
-				res.json({sucess: false, message: 'Could not authenticate user'});
+				res.json({success: false, message: 'Could not authenticate user'});
 			} else if (user) {
 				if( req.body.password) {
                     var validPassword = user.comparePassword(req.body.password);
@@ -39,12 +41,34 @@ module.exports = function(router){
 				if(!validPassword) {
 					res.json({ success: false, message: ' Could not Authenticate password'});
 				} else {
-					res.json({ success: true, message: ' User Authenticated!'});
+					var token = jwt.sign({ username: user.username, email: user.email }, secret, {expiresIn: '24h'}); // create json token when they successfully log in with secret encryption and expires in 24 hours
+					res.json({ success: true, message: ' User Authenticated!', token: token}); // respond to user with that token
 				}
 			}
 		});
 	});
 
+	router.use(function(req, res, next){
+		var token = req.body.token || req.body.query || req.headers['x-access-token'];
+		if(token) {
+			//varify token
+			jwt.verify(token,secret,function(err,decoded){
+				if(err) {
+                    res.json({success: false, message: 'Token invalid'});
+
+                } else {
+					req.decoded = decoded; //decrpyts token - user/email
+					next();
+                }
+			});
+		}else {
+			res.json({success: false, message: 'No token provided'});
+		}
+	});
+
+	router.post('/me', function(req, res) {
+		res.send(req.decoded);
+	});
 
 	return router;
 }
