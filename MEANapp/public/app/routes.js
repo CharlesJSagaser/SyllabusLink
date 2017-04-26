@@ -33,6 +33,9 @@ angular.module('appRoutes',['ngRoute'])
 	.when('/profile', {
 		templateUrl: 'app/views/pages/users/profile.html'
 	})
+	.when('/facebook/:token', {
+        templateUrl: 'app/views/pages/users/social/facebook.html'
+    })
 
 	.otherwise({redirectTo: '/'});
 
