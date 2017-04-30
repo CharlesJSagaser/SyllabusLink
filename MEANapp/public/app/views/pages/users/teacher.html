@@ -1,0 +1,29 @@
+<div class = 'page-header'>
+    <h1>Teacher Page</h1>
+</div>
+
+<br>
+
+<!--Display welcome TEACHER NAME-->
+<!-- Need to display courses-->
+<!-- Add course button with mandatory course information form-->
+<!-- Link each course to a syllabus page-->
+
+
+
+<div class = "jumbotron text-center" ng-show = "main.loading"> <!--whenever ng-show is called it performs action when the .something is called-->
+    <span class = "glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+<br>
+
+<div class = "row show-hide-message" ng-show = "main.successMsg">
+    <div class = "alert alert-success">{{ main.successMsg }}</div>  <!--double brackets is how angular passes data to controller to html page-->
+</div>
+
+<br>
+
+<div class = "row show-hide-message" ng-show = " main.errorMsg">
+    <div class = "alert alert-danger">{{ main.errorMsg }}</div>
+</div>
