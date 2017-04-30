@@ -3,7 +3,7 @@
 angular.module('mainController', ['authServices'])
 
 
-    .controller('mainCtrl', function(Auth,$timeout, $location,$rootScope){
+    .controller('mainCtrl', function(Auth,$timeout, $location,$rootScope, $window){
         var app = this; // so we can access outside of scoper
 
         app.loadme = false;
@@ -23,6 +23,10 @@ angular.module('mainController', ['authServices'])
 
             }
         });
+
+        this.google = function() {
+            $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
+        };
 
 
 
@@ -57,6 +61,6 @@ angular.module('mainController', ['authServices'])
                 $location.path('/');
             }, 2000);
         };
-    });
+    })
 
 
