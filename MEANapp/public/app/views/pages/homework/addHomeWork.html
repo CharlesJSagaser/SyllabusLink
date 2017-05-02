@@ -1,0 +1,29 @@
+v class="page-header">
+	<h1>Homework Information Entry</h1>
+</div>
+
+<form ng-submit="addHomework.addHw(hwData);">
+	
+	<!--Summary-->
+	<label>Summary:</label>
+	<input class="form-control" type="text" name="summary" placeholder="Please enter summary" ng-model="addHomework.hwData.summary">
+	<br>
+
+	<!--Description-->
+	<label>Description:</label>
+	<input class="form-control" type="text" name="description" placeholder="Please enter a description" ng-model="addHomework.hwData.description">
+	<br>
+
+	<!--Start Date/Time-->
+	<label>Start Date/Time:</label>
+	<input class="form-control" type="text" name="start date/time" placeholder="Please enter the start date and time: yyyy-mm-ddTHH:mm:ss-06:00" ng-model="addHomework.hwData.startDate">
+	<br>
+
+	<!--End Date/Time-->
+	<label>End Date/Time:</label>
+	<input class="form-control" type="text" name="end date/time" placeholder="Please enter the end date and time: yyyy-mm-ddTHH:mm:ss-06:00" ng-model="addHomework.hwData.endDate">
+	<br>
+
+	<button class="btn btn-primary" type="submit">Submit</button>
+
+</form>
