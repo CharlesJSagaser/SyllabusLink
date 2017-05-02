@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var appRoutes = require('./app/routes/api')(router);
 var hwRouter = express.Router();
-var hwRoutes = require('./app/routes/api')(hwRouter);
+var hwRoutes = require('./app/routes/hwApi')(hwRouter);
 var path = require('path');
 var passport = require('passport');
 var social = require('./app/passport/passport')(app, passport);
@@ -20,7 +20,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static(__dirname + '/public'));
 app.use('/api', appRoutes);
-app.use('/api', hwRoutes);
+app.use('/hwApi', hwRoutes);
 
 mongoose.connect('mongodb://localhost:27017/test',function(err){
 	if(err) {

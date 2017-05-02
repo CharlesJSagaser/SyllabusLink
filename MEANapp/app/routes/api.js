@@ -2,7 +2,7 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var secret = 'check123';
 var profile = {};
-var Homework = require('../models/homework');
+//var Homework = require('../models/homework');
 
 module.exports = function(router){
 
@@ -87,33 +87,31 @@ module.exports = function(router){
 			})
 	});
 
-	router.post('/homeworks', function(req, res){
-		var homework = new Homework();
-		homework.summary = req.body.summary;
-		homework.description = req.body.description;
-		homework.startDate = req.body.startDate;
-		homework.endDate = req.body.endDate;
-		if(req.body.summary == null || req.body.summary == '' || req.body.description == null || req.body.description == '' || req.body.startDate == null || req.body.startDate == '' || req.body.endDate == null || req.body.endDate == ''){
-			res.send("Ensure all fields were provided!");
-		}
-		else{
-			homework.save(function(err){
-				if(err){
-					res.send('Homework already exists!');
-				}
-				else{
-					res.send('Homework created successfully!');
-				}
-			});
-		}
-	});
-
 	return router;
 }
 
-// module.exports = function(hwRouter){
+//module.exports = function(hwRouter){
 
-	
-
-// 	return hwRouter;
-// }
+//	hwRouter.post('/homeworks', function(req, res){
+//		var homework = new Homework();
+//		homework.summary = req.body.summary;
+//		homework.description = req.body.description;
+//		homework.startDate = req.body.startDate;
+//		homework.endDate = req.body.endDate;
+//		if(req.body.summary == null || req.body.summary == '' || req.body.description == null || req.body.description == '' || req.body.startDate == null || req.body.startDate == '' || req.body.endDate == null || req.body.endDate == ''){
+//			res.send("Ensure all fields were provided!");
+//		}
+//		else{
+//			homework.save(function(err){
+//				if(err){
+//					res.send('Homework already exists!');
+//				}
+//				else{
+//					res.send('Homework created successfully!');
+//				}
+//			});
+//		}
+//	});
+//
+//	return hwRouter;
+//}
