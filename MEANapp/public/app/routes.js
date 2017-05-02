@@ -68,11 +68,6 @@ var app = angular.module('appRoutes',['ngRoute'])
 
 		})
 
-		.when('/addHomework', {
-			templateUrl: 'app/views/pages/homework/addHomework.html',
-			
-			permission: ['admin', 'user']
-		})
 
 
 
