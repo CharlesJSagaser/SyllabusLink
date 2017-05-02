@@ -62,6 +62,13 @@ var app = angular.module('appRoutes',['ngRoute'])
 
 		})
 
+		.when('/addHomework', {
+			templateUrl: 'app/views/pages/homework/addHomework.html',
+			controller: 'addHwCtrl',
+			controllerAs: 'addHomework',
+			permission: ['admin', 'user']
+		})
+
 
 
 	.otherwise({redirectTo: '/'});
