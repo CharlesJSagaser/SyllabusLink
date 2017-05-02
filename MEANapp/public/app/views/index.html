@@ -24,6 +24,7 @@
     <script src="app/controllers/userctrl.js"></script>
     <script src="app/controllers/mainCtrl.js"></script>
     <script src="app/controllers/managementCtrl.js"></script>
+    <script src="app/controllers/homeworkCtrl.js"></script>
 
     <!-- Angular Services -->
     <script src = "app/services/userServices.js"></script>
@@ -57,6 +58,7 @@
             <li><a ng-show ="!main.isLoggedIn" href ='/login'>Login</a></li>
 
             <li><a ng-show ="!main.isLoggedIn" href="/register">Register</a></li>
+            <li><a ng-show ="main.isLoggedIn" href ="/addHomework">Add Homework</a></li>
             <li><a ng-show ="main.isLoggedIn" href = "#" ng-click = "main.logout();">Logout</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
