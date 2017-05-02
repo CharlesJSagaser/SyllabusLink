@@ -26,6 +26,12 @@ var app = angular.module('appRoutes',['ngRoute'])
 			templateUrl: 'app/views/pages/users/login.html'
 		})
 
+		.when('/addHomework', {
+		templateUrl: 'app/views/pages/homework/addHomeWork.html',
+		controller: 'addHwCtrl',
+		controllerAs: 'addHomework'
+	})
+
 		.when('/logout', {
 			templateUrl: 'app/views/pages/users/logout.html'
 		})
