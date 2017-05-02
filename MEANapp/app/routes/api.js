@@ -87,12 +87,7 @@ module.exports = function(router){
 			})
 	});
 
-	return router;
-}
-
-module.exports = function(hwRouter){
-
-	hwRouter.post('/homeworks', function(req, res){
+	router.post('/homeworks', function(req, res){
 		var homework = new Homework();
 		homework.summary = req.body.summary;
 		homework.description = req.body.description;
@@ -113,5 +108,12 @@ module.exports = function(hwRouter){
 		}
 	});
 
-	return hwRouter;
+	return router;
 }
+
+// module.exports = function(hwRouter){
+
+	
+
+// 	return hwRouter;
+// }
