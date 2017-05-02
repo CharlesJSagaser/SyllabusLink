@@ -15,7 +15,6 @@ angular.module('authServices', [])
                 AuthToken.setToken(token); // Set token retrieved from passportJS
         };
 
-
         //Auth.isLoggedIn();
         authFactory.isLoggedIn = function(){
             if (AuthToken.getToken()){

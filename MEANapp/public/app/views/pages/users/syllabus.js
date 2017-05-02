@@ -3,7 +3,7 @@ var exam = 0;
 var ta = 0;
 var proj = 0;
 var other = 0;
-var i = 0;
+//var i = 0;
 
 function incrementhw(){
 hw += 1; /* Function for automatic increment of field's "Name" attribute. */
@@ -29,6 +29,7 @@ other += 1; /* Function for automatic increment of field's "Name" attribute. */
 function increment(){
 i += 1; /* Function for automatic increment of field's "Name" attribute. */
 }
+
 /*
 
 ---------------------------------------------
@@ -38,18 +39,18 @@ Function to Remove Form Elements Dynamically
 
 */
 function removeElement(parentDiv, childDiv){
-if (childDiv == parentDiv){
-alert("The parent div cannot be removed.");
-}
-else if (document.getElementById(childDiv)){
-var child = document.getElementById(childDiv);
-var parent = document.getElementById(parentDiv);
-parent.removeChild(child);
-}
-else{
-alert("Child div has already been removed or does not exist.");
-return false;
-}
+    if (childDiv == parentDiv){
+    alert("The parent div cannot be removed.");
+    }
+    else if (document.getElementById(childDiv)){
+        var child = document.getElementById(childDiv);
+        var parent = document.getElementById(parentDiv);
+    parent.removeChild(child);
+    }
+    else{
+    alert("Child div has already been removed or does not exist.");
+    return false;
+    }
 }
 
 /*
@@ -77,7 +78,7 @@ function addHomework(){
 	tx.setAttribute("onclick", "removeElement('sylData','hwtitle_" + hw + "'')");
 	ts.appendChild(tx);
 	ts.setAttribute("id", "hwtitle_" + hw);
-	break;
+	//break;
 	
 	var ms = document.createElement('span');
 	var mi = document.createElement('Input');
@@ -90,7 +91,7 @@ function addHomework(){
 	mx.setAttribute("onclick", "removeElement('sylData','hwmaterial_" + hw + "'')");
 	ms.appendChild(tx);
 	ms.setAttribute("id", "hwmaterial_" + hw);
-	break;
+	//break;
 
 	var as = document.createElement('span');
 	var ai = document.createElement('Input');
@@ -103,7 +104,7 @@ function addHomework(){
 	ax.setAttribute("onclick", "removeElement('sylData','hwassigned_" + hw + "'')");
 	as.appendChild(tx);
 	as.setAttribute("id", "hwassigned_" + hw);
-	break;
+	//break;
 
 	var ds = document.createElement('span');
 	var di = document.createElement('Input');
@@ -116,7 +117,7 @@ function addHomework(){
 	dx.setAttribute("onclick", "removeElement('sylData','hwdue_" + hw + "'')");
 	ds.appendChild(tx);
 	ds.setAttribute("id", "hwdue_" + hw);
-	break;
+	//break;
 
 	var ws = document.createElement('span');
 	var wi = document.createElement('Input');
@@ -129,7 +130,7 @@ function addHomework(){
 	wx.setAttribute("onclick", "removeElement('sylData','hwtime_" + hw + "'')");
 	ws.appendChild(tx);
 	ws.setAttribute("id", "hwtime_" + hw);
-	break;
+	//break;
 
 	/*Due location to go here*/
 
@@ -153,9 +154,10 @@ Functions that will be called upon, when user click on the HW text field.
 */
 
 function homeworkBlock(){
+    console.log('test');
 	var hwBlockButton = document.createElement('div');
 	hwBlockButton.id = "addHomeworkButton"
-	hwBlockButton.innerHTML = "<input type="button" value="Add a Homework" onClick ="addHomework();">";
+	//hwBlockButton.innerHTML = "<input type="button" value="Add a Homework" onClick ="addHomework();">";
 	document.getElementById(sylData).appendChild(hwBlockButton);
 	increment();
 }

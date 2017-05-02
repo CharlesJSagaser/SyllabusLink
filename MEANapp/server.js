@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(express.static(__dirname + '/public'));
 app.use('/api', appRoutes);
 
-mongoose.connect('mongodb://localhost:27017/test',function(err){
+mongoose.connect('mongodb://heroku_rlcgft36:6o6uhu9ja73111nn7o0i0scoir@ds129031.mlab.com:29031/heroku_rlcgft36
+',function(err){
 	if(err) {
 		console.log('Not connected to the database:' + err);
 	} else {

@@ -1,8 +1,7 @@
 //creates a template for a Subscription
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt-nodejs');
+
 
 
 
@@ -11,7 +10,7 @@ var SubscriptionSchema = new Schema({
 	end: {type: Date, required: true}
 	semestercost: {type: Number, required:true}
 
-})
+});
 
 
 

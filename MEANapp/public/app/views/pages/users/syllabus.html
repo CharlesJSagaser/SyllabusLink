@@ -4,11 +4,13 @@
 
 <!-- Insert Mandartory Course info provided on course creation-->
 
+<script src = "public/app/views/pages/users/sylltest.js" type = "text/javascript"></script>
+
 <!DOCTYPE html>
-<html>
+<html ng-app = "app1">
 <head>
 <title>Create Dynamic form Using JavaScript</title>
-<script src="js/form.js" type="text/javascript"></script>
+<script src="form.js" type="text/javascript"></script>
 <link href="form.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -27,9 +29,9 @@ Header Div.
 This Div is for the Buttons. When user click on buttons, respective field will appear.
 =======================================================================================
 -->
-<div class="two">
+<div ng-controller = "ctrlSyl" class="two">
 <h4>Syllabus Component Blocks</h4>
-<button onclick="homeworkBlock()">Homework</button>
+<button ng-click="homeworkBlock()">Homework</button>
 <button onclick="taFunction()">TA</button>
 <button onclick="ExamFunction()">Exam</button>
 <button onclick="projectFunction()">Project</button>
@@ -99,3 +101,10 @@ Footer Div.
 <div class = "row show-hide-message" ng-show = " main.errorMsg">
     <div class = "alert alert-danger">{{ main.errorMsg }}</div>
 </div>
+
+<fieldset id="buildyourform">
+    <legend>Build your own form!</legend>
+</fieldset>
+
+<script src="assets/js/angular.js"></script>
+<script src="assets/js/angular-route.js"></script>

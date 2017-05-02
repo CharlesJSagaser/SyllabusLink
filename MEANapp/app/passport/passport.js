@@ -4,8 +4,11 @@ var session = require('express-session');
 var jwt = require('jsonwebtoken');
 var secret = 'check123';
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var gcal = require('google-calendar');
+var google = require('googleapis');
 
-module.exports = function(app,passport) {
+
+module.exports = function(app,passport, auth) {
 
 
     app.use(passport.initialize());
@@ -31,7 +34,7 @@ module.exports = function(app,passport) {
     passport.use(new FacebookStrategy({
             clientID: '422080801499546',
             clientSecret: '34f91021248106dea49daa111bb7ff89',
-            callbackURL: "http://localhost:8000/auth/facebook/callback",
+            callbackURL: "https://frozen-woodland-75947.herokuapp.com/auth/google/callback",
             profileFields: ['id', 'displayName', 'photos', 'email']
         },
         function(accessToken, refreshToken, profile, done) {
@@ -56,12 +59,12 @@ module.exports = function(app,passport) {
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
     passport.use(new GoogleStrategy({
-            clientID: '655984940226-ob15jvq3hvqha4969tlb3oco9tun1i9t.apps.googleusercontent.com',
-            clientSecret: 'v2AnVyHOrkftnGRFnpAXxB7-',
+            clientID: ' 655984940226-dqfpncns14b1uih73i7fpmot9hd16m2l.apps.googleusercontent.com ',
+            clientSecret: ' 4etHKG0Hhj84bKCBPr2YmaC- ',
             callbackURL: "http://localhost:8000/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            console.log(profile.emails[0].value);
+
             User.findOne({ email: profile.emails[0].value }).select('username password email').exec(function(err, user){
                 if(err) done(err);
 
@@ -71,11 +74,70 @@ module.exports = function(app,passport) {
                     done(err);
                 }
             });
-        }
-    ));
 
-    app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'profile', 'email' ] }));
-    app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/calender' ] }));
+            var google_calendar = google.calendar('v3');
+            console.log('im here');
+            google_calendar.events.list({
+                auth: auth,
+                calendarId: 'primary',
+                timeMin: (new Date()).toISOString(),
+                singleEvents: true,
+                orderBy: 'startTime'
+            }, function(err, calendarList){
+                console.log(calendarList);
+                if(err){
+                    console.log('bad list: ' + err);
+                    return;
+                }
+                var events = calendarList.items;
+                if(events.length ==0){
+                    console.log('No items found');
+                } else {
+                    console.log('Upcoming events:');
+                    console.log('%s -%s', start, event.summary);
+                }
+
+            })
+
+
+        }
+
+        // function(auth) {
+        //     console.log('hihihihihi');
+        //     var calendar = google.calendar('v3');
+        //     calendar.events.list({
+        //         auth: auth,
+        //         calendarId: 'primary',
+        //         timeMin: (new Date()).toISOString(),
+        //         maxResults: 10,
+        //         singleEvents: true,
+        //         orderBy: 'startTime'
+        //     }, function(err, response) {
+        //         if (err) {
+        //             console.log('The API returned an error: ' + err);
+        //             return;
+        //         }
+        //         var events = response.items;
+        //         if (events.length == 0) {
+        //             console.log('No upcoming events found.');
+        //         } else {
+        //             console.log('Upcoming 10 events:');
+        //             for (var i = 0; i < events.length; i++) {
+        //                 var event = events[i];
+        //                 var start = event.start.dateTime || event.start.date;
+        //                 console.log('%s - %s', start, event.summary);
+        //             }
+        //         }
+        //     });
+        // }
+
+
+
+
+));
+
+    app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar', 'profile', 'email' ] }));
+    //app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/calender' ] }));
 
     app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/googleerror' }),
         function(req, res) {
