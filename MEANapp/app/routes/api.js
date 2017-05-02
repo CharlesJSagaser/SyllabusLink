@@ -1,6 +1,7 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var secret = 'check123';
+var profile = {};
 
 module.exports = function(router){
 
@@ -10,6 +11,9 @@ module.exports = function(router){
 		user.username = req.body.username;
 		user.password = req.body.password;
 		user.email = req.body.email;
+		user.teacher = req.body.teacher;
+		
+
 		if(req.body.username == null || req.body.username == ''|| req.body.password == null || req.body.email == null || req.body.password == '' || req.body.email == ''){
 			res.json({ success: false, message: 'Ensure username, email, and password were provided'}); //false if the route is null empty etc.
 		} else {
@@ -17,6 +21,7 @@ module.exports = function(router){
 			if(err) {
 				res.json({success: false, message: 'Username or email already exists'});
 			} else {
+
 				res.json({success: true, message: 'user created!'});
 			}
 		});
@@ -68,6 +73,17 @@ module.exports = function(router){
 
 	router.post('/me', function(req, res) {
 		res.send(req.decoded);
+	});
+
+	router.get('/permission', function(req,res){
+			User.findOne({username: req.decoded.username}, function(err, user){
+				if(err) throw err;
+				if(!user){
+					res.json({success: false, message: 'No user was found'});
+				} else {
+					res.json({success: true, permission: user.permission})
+				}
+			})
 	});
 
 	return router;

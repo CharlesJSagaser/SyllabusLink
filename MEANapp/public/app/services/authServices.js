@@ -4,10 +4,10 @@ angular.module('authServices', [])
         var authFactory = {};
 
 
-        authFactory.login = function(loginData) {
+        authFactory.login = function(loginData,$window) {
             return $http.post('/api/authenticate', loginData).then(function(data){
                 AuthToken.setToken(data.data.token);
-                return data;
+                             return data;
             });
         };
 
@@ -26,6 +26,8 @@ angular.module('authServices', [])
             }
 
         };
+
+
 
         //Auth.getUser();
         authFactory.getUser = function(){
