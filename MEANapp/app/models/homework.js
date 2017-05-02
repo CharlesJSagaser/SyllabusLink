@@ -15,7 +15,6 @@
 
 
 
-
 //module.exports = mongoose.model('Homework', HomeworkSchema);
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
