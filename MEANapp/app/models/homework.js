@@ -17,7 +17,6 @@ var SyllabusSchema = new Schema({
 
 
 module.exports = mongoose.model('Homework', HomeworkSchema);
-=======
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
