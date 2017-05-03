@@ -62,10 +62,15 @@ var app = angular.module('appRoutes',['ngRoute'])
 
 		.when('/management', {
 			templateUrl: 'app/views/pages/users/management.html',
-			conoller: 'managementCtrl',
+			contoller: 'managementCtrl',
 			controllerAs: 'management',
 			permission: ['teacher', 'admin']
 
+		})
+		.when('/calendar', {
+			templateUrl: 'app/views/pages/users/calendar.html',
+			controller: 'gcalCtrl',
+			controllerAs: 'calendar'
 		})
 
 

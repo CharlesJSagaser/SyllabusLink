@@ -27,4 +27,4 @@ var homeworkEntrySchema = new Schema({
 	endDate: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Homework', homeworkEntrySchema);
+module.exports = mongoose.model('homework', homeworkEntrySchema);
