@@ -67,16 +67,15 @@ var app = angular.module('appRoutes',['ngRoute'])
 			permission: ['teacher', 'admin']
 
 		})
-		.when('/calendar', {
-			templateUrl: 'app/views/pages/users/calendar.html',
-			controller: 'gcalCtrl',
-			controllerAs: 'calendar'
-		})
+	
+
+		
 
 
 
 
-	.otherwise({redirectTo: '/'});
+
+	.otherwise({redirectTo: './controller/home-mongo'});
 
 	$locationProvider.html5Mode({
 	enabled: true,
