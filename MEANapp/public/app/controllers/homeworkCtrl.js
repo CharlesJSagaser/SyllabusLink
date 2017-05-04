@@ -9,13 +9,12 @@ angular.module('homeworkControllers', ['homeworkServices'])
 })
 
 .controller('homeworkCtrl', function(Homework){
-	//app = this;
-
-	this.getHW = function(hwData) {
+	app = this;
+	app.getHW = function(hwData) {
 		console.log(hwData);
-		Homework.getHW(hwData).then(function(data){
-			console.log(data);
-		});
+		Homework.getHW(hwData)
+			//console.log(data);
+		
 	};
 	
 });
