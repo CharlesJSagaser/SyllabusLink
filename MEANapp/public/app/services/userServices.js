@@ -14,5 +14,7 @@ angular.module('userServices', [])
 		return $http.get('/api/permission');
 	};
 
+	//User.getHW(hwData)
+	
 	return userFactory;
 });

@@ -54,6 +54,8 @@ module.exports = function(router){
 		});
 	});
 
+	
+
 	router.use(function(req, res, next){
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
 		if(token) {
