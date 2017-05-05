@@ -11,7 +11,29 @@
     <br> 
 
 
-    <button type = "submit" class = "btn btn-primary"> retrieve HW</button>&nbsp
+    <button type = "submit" class = "btn btn-primary"> Retrieve Homework</button>&nbsp
+
+    <br>
+    <br>
+
+    <table class="table">
+    	<thead>
+    		<tr>
+    			<th>Summary</th>
+    			<th>Description</th>
+    			<th>Start Date</th>
+    			<th>End Date</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr ng-repeat="homeworks in Homework">
+    			<td>{{homeworks.summary}}</td>
+    			<td>{{homeworks.description}}</td>
+    			<td>{{homeworks.startDate}}</td>
+    			<td>{{homeworks.endDate</td>
+    		</tr>
+    	</tbody>
+    </table>
 
 
 
