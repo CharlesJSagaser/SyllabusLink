@@ -4,40 +4,54 @@
 
 
 
-<form ng-submit= "homework.getHW('s');">
 
-    <label>Summary:</label>
-    <input class = "form-control" type="text" name="username" placeholder ="Please enter you Username" ng-model = "homework.homeworkData.summary">
-    <br> 
+<div class = "panel panel-primary">
+	<div class = "panel-heading">
+		<strong>Homeworks</strong>
+	</div>
+	<table class = "table">
+		<tr>
+			<th>custom add</th>
+			<th>Sumary</th>
+			<th>description</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+		</tr>
+		<tr>
+			<td>
+			<input type ="checkbox"><br>
+			</td>
+			<td>s</td>
+			<td>s</td>
+			<td>1111-11-11T-11:11:11-06:00</td>
+			<td>1111-11-11T-11:11:11-06:00</td>
+			<td>
+				<a href = "#">
+					<button type="button" class = "btn btn-primary">Add to calendar</button>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type ="checkbox"><br>
+			</td>
+			<td>ss</td>
+			<td>ss</td>
+			<td>1111-11-11T-11:11:11-06:00</td>
+			<td>1111-11-11T-11:11:11-06:00</td>
+			<td>
+				<a href = "#">
+					<button type="button" class = "btn btn-primary">Add to calendar</button>
+				</a>
+			</td>
+		</tr>
+		
 
+	</table>
 
-    <button type = "submit" class = "btn btn-primary"> retrieve HW</button>&nbsp
+	
 
-
-
-
-</form>
-
-
-<br>
-
-<div class = "jumbotron text-center" ng-show = "homework.loading"> <!--whenever ng-show is called it performs action when the .something is called-->
-    <span class = "glyphicon-repeat spinner"></span>
-    <p>Loading....</p>
 </div>
+<div><button type = "button" class = "btn btn-primary">Add selected</button></div>
 
 
-
-
-
-<br>
-
-<div class = "row show-hide-message" ng-show = "homework.successMsg">
-    <div class = "alert alert-success">{{ homework.successMsg }}</div>  <!--double brackets is how angular passes data to controller to html page-->
-</div>
-
-<br>
-
-<div class = "row show-hide-message" ng-show = " homework.errorMsg">
-    <div class = "alert alert-danger">{{ homework.errorMsg }}</div>
-</div>

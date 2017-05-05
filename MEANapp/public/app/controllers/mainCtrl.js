@@ -5,7 +5,7 @@ angular.module('mainController', ['authServices'])
 
     .controller('mainCtrl', function(Auth,$timeout, $location,$rootScope, $window){
         var app = this; // so we can access outside of scoper
-
+        
         app.loadme = false;
 
         $rootScope.$on('$routeChangeStart', function() {
