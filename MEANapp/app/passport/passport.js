@@ -7,8 +7,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var gcal = require('google-calendar');
 var google = require('googleapis');
 
-
-module.exports = function(app,passport, auth) {
+module.exports = function(app,passport,tok) {
 
 
     app.use(passport.initialize());
@@ -22,6 +21,7 @@ module.exports = function(app,passport, auth) {
 
     passport.serializeUser(function(user, done) {
         token = jwt.sign({ username: user.username, email: user.email }, secret, {expiresIn: '24h'});
+        user.token = token;
         done(null, user.id);
     });
 
@@ -38,6 +38,7 @@ module.exports = function(app,passport, auth) {
             profileFields: ['id', 'displayName', 'photos', 'email']
         },
         function(accessToken, refreshToken, profile, done) {
+
             console.log(profile._json.email);
             User.findOne({ email: profile._json.email }).select('username password email').exec(function(err, user){
                 if(err) done(err);
@@ -64,7 +65,9 @@ module.exports = function(app,passport, auth) {
             callbackURL: "http://localhost:8000/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-
+            var tok = accessToken;
+            module.exports.tok = tok;
+            console.log('token:' +  accessToken)
             User.findOne({ email: profile.emails[0].value }).select('username password email').exec(function(err, user){
                 if(err) done(err);
 
@@ -75,30 +78,7 @@ module.exports = function(app,passport, auth) {
                 }
             });
 
-            var google_calendar = google.calendar('v3');
-            console.log('im here');
-            google_calendar.events.list({
-                auth: auth,
-                calendarId: 'primary',
-                timeMin: (new Date()).toISOString(),
-                singleEvents: true,
-                orderBy: 'startTime'
-            }, function(err, calendarList){
-                console.log(calendarList);
-                if(err){
-                    console.log('bad list: ' + err);
-                    return;
-                }
-                var events = calendarList.items;
-                if(events.length ==0){
-                    console.log('No items found');
-                } else {
-                    console.log('Upcoming events:');
-                    console.log('%s -%s', start, event.summary);
-                }
-
-            })
-
+       
 
         }
 
@@ -150,7 +130,7 @@ module.exports = function(app,passport, auth) {
 
     app.get('/auth/facebook/', passport.authenticate('facebook', { scope: 'email' }));
 
-
+    
     return passport;
 };
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy; // Import Passport Google Package

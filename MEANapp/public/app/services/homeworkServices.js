@@ -8,13 +8,10 @@ angular.module('homeworkServices', [])
 
 
 	//Homework.getHW(hwData)
-	homeworkFactory.getHW = function(hwData){
+	homeworkFactory.getHW = function(){
 		
-		$http.get('/hwApi/retrieveHW/' + hwData)
-
-
+		$http.get('/hwApi/retrieveHW/')
 	};
-
 
 	return homeworkFactory
 });

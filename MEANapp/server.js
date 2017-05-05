@@ -13,7 +13,8 @@ var hwRoutes = require('./app/routes/hwApi')(hwRouter);
 var path = require('path');
 var passport = require('passport');
 var social = require('./app/passport/passport')(app, passport);
-
+var mongojs = require('mongojs')
+var db = mongojs('test',['homeworks']);
 
 app.use(morgan('dev'));
 app.use(bodyParser.json()); // for parsing application/json
@@ -35,7 +36,16 @@ app.get('*',function(req,res){
 
 });
 
+
+
 app.listen(port,function(){
 	console.log('Running the server port:' + port);
+});
+
+app.get('/test', function(req,res){
+	db.test.find(function(err,docs){
+		console.log(docs);
+		res.json(docs);
+	});
 });
 

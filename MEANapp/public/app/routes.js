@@ -70,7 +70,7 @@ var app = angular.module('appRoutes',['ngRoute'])
 
 		.when('/retrieveHW', {
 			templateUrl: 'app/views/pages/users/homework/homework.html',
-			controller: 'homeworkCtrl',
+			controller: 'testList',
 			controllerAs: 'homework',
 			permission: ['teacher', 'user']
 		})
